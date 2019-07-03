@@ -2,6 +2,8 @@
 This module contains the "master" class objects that represent the various objects in the FMC.
 """
 
+import logging
+
 logging.debug("In the {} module.".format(__name__))
 
 

@@ -10,8 +10,7 @@ import datetime
 import requests
 import time
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
-
-from .helper_functions import *
+import logging
 from fmcapi.api_objects import *
 
 # Disable annoying HTTP warnings

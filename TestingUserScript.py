@@ -2,16 +2,16 @@
 Unit testing, of a sort, all the created methods/classes.
 """
 
-from fmcapi.fmc import *
 import logging
 import time
 import pprint
+from fmcapi.fmc import *
 
 # ### Set these variables to match your environment. ### #
 
-host = 'x.y.z.w'
-username = 'apiscript'
-password = 'XXXXXXXX'
+host = '10.0.0.10'
+username = 'apiadmin'
+password = 'Admin123'
 autodeploy = False
 
 # ### These functions are the individual tests you can run to ensure functionality. ### #
