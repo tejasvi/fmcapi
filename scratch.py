@@ -1,6 +1,5 @@
 from fmcapi.fmc import *
-from fmcapi.api_objects import *
-from fmcapi.api_objects.helper_functions import *
+from fmcapi.helper_functions import *
 import json
 
 # ### Set these variables to match your environment. ### #

@@ -5,7 +5,7 @@ Unit testing, of a sort, all the created methods/classes.
 import logging
 import time
 import pprint
-from fmcapi.fmc import *
+from fmcapi import *
 
 # ### Set these variables to match your environment. ### #
 

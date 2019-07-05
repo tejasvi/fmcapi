@@ -3,6 +3,7 @@ This module contains the "master" class objects that represent the various objec
 """
 
 import logging
+from .helper_functions import *
 
 logging.debug("In the {} module.".format(__name__))
 

@@ -3,6 +3,7 @@ The fmcapi __init__.py file is called whenever someone imports the package into 
 """
 
 import logging
+from .fmc import *
 
 # Its always good to set up a log file.
 logging_format = '%(asctime)s - %(levelname)s:%(filename)s:%(lineno)s - %(message)s'
