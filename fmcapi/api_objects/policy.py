@@ -596,6 +596,7 @@ class FTDNatPolicy(APIClassTemplate):
         super().parse_kwargs(**kwargs)
         logging.debug("In parse_kwargs() for FTDNatPolicy class.")
 
+
 class AutoNatRules(APIClassTemplate):
     """
     The AutoNatRules Object in the FMC.
@@ -808,6 +809,7 @@ class AutoNatRules(APIClassTemplate):
             self.patOptions["extendedPat"] = options.extendedPat if "extendedPat" in options.keys() else False
             self.patOptions["flatPortRange"] = options.flatPortRange if "flatPortRange" in options.keys() else False
             logging.info('Adding "{}" to patPool for this AutoNatRule.'.format(name))
+
 
 class ManualNatRules(APIClassTemplate):
     #Host,Network,NetworkGroup objects
@@ -1138,6 +1140,7 @@ class ManualNatRules(APIClassTemplate):
             self.patOptions["extendedPat"] = options.extendedPat if "extendedPat" in options.keys() else False
             self.patOptions["flatPortRange"] = options.flatPortRange if "flatPortRange" in options.keys() else False
             logging.info('Adding "{}" to patPool for this AutoNatRule.'.format(name))
+
 
 class NatRules(APIClassTemplate):
     """

@@ -767,6 +767,7 @@ class SLAMonitor(APIClassTemplate):
         else:
             logging.warning('No valid Security Zones found: "{}".  Cannot add to SLAMonitor.'.format(names))
 
+
 class URL(APIClassTemplate):
     """
     The URL Object in the FMC.

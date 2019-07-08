@@ -1497,6 +1497,7 @@ class DeviceHAPairs(APIClassTemplate):
         self.fmc.autodeploy = False
         return super().put(**kwargs)
 
+
 class DeviceHAMonitoredInterfaces(APIClassTemplate):
     """
     The DeviceHAMonitoredInterfaces Object in the FMC.
@@ -1559,6 +1560,7 @@ class DeviceHAMonitoredInterfaces(APIClassTemplate):
     def post(self):
         logging.info('POST method for API for DeviceHAMonitoredInterfaces not supported.')
         pass
+
 
 class DeviceHAFailoverMAC(APIClassTemplate):
     """
