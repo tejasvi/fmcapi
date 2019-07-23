@@ -1,9 +1,10 @@
 """
 This module contains the "master" class objects that represent the various objects in the FMC.
 """
+from fmcapi.api_objects.helper_functions import syntax_correcter
 
+import json
 import logging
-from .helper_functions import *
 
 logging.debug("In the {} module.".format(__name__))
 

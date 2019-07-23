@@ -2,13 +2,13 @@
 This module contains the "object" class objects that represent the various objects in the FMC.
 """
 
-from .api_template import *
-from .helper_functions import *
-from .api_template import *
-from .devices import *
-from .misc import *
-from .objects import *
-from .policy import *
+from fmcapi.api_objects.helper_functions import (get_networkaddress_type,
+                                                 validate_ip_bitmask_range,
+                                                 validate_vlans)
+from fmcapi.api_objects.api_template import APIClassTemplate
+from fmcapi.api_objects.devices import PhysicalInterface
+
+import logging
 
 
 class IPAddresses(APIClassTemplate):

@@ -1,14 +1,10 @@
 """
 This module contains the "miscellaneous" class objects that represent the various objects in the FMC.
 """
+from fmcapi.api_objects.devices import Device
+from fmcapi.api_objects.api_template import APIClassTemplate
 
-from .api_template import *
-from .helper_functions import *
-from .api_template import *
-from .devices import *
-from .misc import *
-from .objects import *
-from .policy import *
+import logging
 
 
 class TaskStatuses(APIClassTemplate):

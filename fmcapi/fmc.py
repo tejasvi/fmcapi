@@ -11,7 +11,7 @@ import requests
 import time
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
-from fmcapi.api_objects import *
+import json
 
 # Disable annoying HTTP warnings
 requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
