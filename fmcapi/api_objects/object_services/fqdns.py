@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 
 
@@ -7,10 +7,10 @@ class FQDNS(APIClassTemplate):
     The FQDNS Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/fqdns'
+    url_suffix = '/object/fqdns'
     VALID_FOR_DNS_RESOLUTION = ['IPV4_ONLY', 'IPV6_ONLY', 'IPV4_AND_IPV6']
-    VALID_CHARACTERS_FOR_NAME = """[.\w\d_\- ]"""
-    FIRST_SUPPORTED_FMC_VERSION = '6.3.0'
+    valid_characters_for_name = """[.\w\d_\- ]"""
+    first_supported_fmc_version = '6.3.0'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

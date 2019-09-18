@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 import warnings
 
@@ -8,8 +8,8 @@ class FTDNatPolicies(APIClassTemplate):
     The FTDNatPolicies Object in the FMC.
     """
 
-    URL_SUFFIX = '/policy/ftdnatpolicies'
-    VALID_CHARACTERS_FOR_NAME = """[.\w\d_\- ]"""
+    url_suffix = '/policy/ftdnatpolicies'
+    valid_characters_for_name = """[.\w\d_\- ]"""
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

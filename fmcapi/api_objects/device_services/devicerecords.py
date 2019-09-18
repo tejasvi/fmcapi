@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from fmcapi.api_objects.policy_services.accesspolicies import AccessPolicies
 import time
 import logging
@@ -10,9 +10,9 @@ class DeviceRecords(APIClassTemplate):
     The DeviceRecords Object in the FMC.
     """
 
-    URL_SUFFIX = '/devices/devicerecords'
-    REQUIRED_FOR_POST = ['accessPolicy', 'hostName', 'regKey']
-    REQUIRED_FOR_PUT = ['id']
+    url_suffix = '/devices/devicerecords'
+    required_for_post = ['accessPolicy', 'hostName', 'regKey']
+    required_for_put = ['id']
     LICENSES = ['BASE', 'MALWARE', 'URLFilter', 'THREAT', 'VPN']
 
     def __init__(self, fmc, **kwargs):

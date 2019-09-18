@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from .securityzones import SecurityZones
 import logging
 import warnings
@@ -8,9 +8,9 @@ class SLAMonitors(APIClassTemplate):
     """
     The SLAMonitors Object in the FMC.
     """
-    URL_SUFFIX = '/object/slamonitors'
-    REQUIRED_FOR_POST = ['name', 'slaId', 'monitorAddress', 'interfaceObjects', 'type']
-    REQUIRED_FOR_PUT = ['id', 'type']
+    url_suffix = '/object/slamonitors'
+    required_for_post = ['name', 'slaId', 'monitorAddress', 'interfaceObjects', 'type']
+    required_for_put = ['id', 'type']
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from .ftddevicehapairs import FTDDeviceHAPairs
 import logging
 import warnings
@@ -10,7 +10,7 @@ class MonitoredInterfaces(APIClassTemplate):
     """
 
     PREFIX_URL = '/devicehapairs/ftddevicehapairs'
-    REQUIRED_FOR_PUT = ['id']
+    required_for_put = ['id']
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

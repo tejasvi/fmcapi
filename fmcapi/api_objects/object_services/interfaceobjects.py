@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 import warnings
 
@@ -8,8 +8,8 @@ class InterfaceObjects(APIClassTemplate):
     The InterfaceObjects Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/interfaceobjects'
-    REQUIRED_FOR_POST = ['name', 'interfaceMode']
+    url_suffix = '/object/interfaceobjects'
+    required_for_post = ['name', 'interfaceMode']
     FILTER_BY_NAME = True
 
     def __init__(self, fmc, **kwargs):

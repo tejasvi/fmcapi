@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from fmcapi.api_objects.device_services.devicerecords import Device
 from .upgradepackages import UpgradePackages
 import logging
@@ -12,7 +12,7 @@ class Upgrades(APIClassTemplate):
     We can rename this after we remove that deprecation... which will be a while from now.
     """
 
-    URL_SUFFIX = '/updates/upgrades'
+    url_suffix = '/updates/upgrades'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

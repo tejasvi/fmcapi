@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from fmcapi.api_objects.helper_functions import *
 import logging
 import warnings
@@ -9,9 +9,9 @@ class Hosts(APIClassTemplate):
     The Host Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/hosts'
-    REQUIRED_FOR_POST = ['name', 'value']
-    REQUIRED_FOR_PUT = ['id', 'name', 'value']
+    url_suffix = '/object/hosts'
+    required_for_post = ['name', 'value']
+    required_for_put = ['id', 'name', 'value']
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

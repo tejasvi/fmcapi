@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from fmcapi.api_objects.policy_services.accesspolicies import AccessPolicies
 from fmcapi.api_objects.policy_services.intrusionpolicies import IntrusionPolicies
 from fmcapi.api_objects.object_services.variablesets import VariableSets
@@ -21,11 +21,11 @@ class AccessRules(APIClassTemplate):
     The AccessRules Object in the FMC.
     """
     PREFIX_URL = '/policy/accesspolicies'
-    REQUIRED_FOR_POST = ['name', 'acp_id']
-    REQUIRED_FOR_GET = ['acp_id']
+    required_for_post = ['name', 'acp_id']
+    required_for_get = ['acp_id']
     VALID_FOR_ACTION = ['ALLOW', 'TRUST', 'BLOCK', 'MONITOR', 'BLOCK_RESET', 'BLOCK_INTERACTIVE',
                         'BLOCK_RESET_INTERACTIVE']
-    VALID_CHARACTERS_FOR_NAME = """[.\w\d_\- ]"""
+    valid_characters_for_name = """[.\w\d_\- ]"""
 
     @property
     def URL_SUFFIX(self):

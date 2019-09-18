@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from fmcapi.api_objects.helper_functions import validate_vlans
 import logging
 import warnings
@@ -9,8 +9,8 @@ class VlanTags(APIClassTemplate):
     The VlanTags Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/vlantags'
-    REQUIRED_FOR_POST = ['name', 'data']
+    url_suffix = '/object/vlantags'
+    required_for_post = ['name', 'data']
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

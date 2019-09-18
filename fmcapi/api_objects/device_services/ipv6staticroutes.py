@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from .devicerecords import Device
 from fmcapi.api_objects.object_services.networkaddresses import NetworkAddresses
 from fmcapi.api_objects.object_services.hosts import Hosts
@@ -13,9 +13,9 @@ class IPv6StaticRoutes(APIClassTemplate):
     """
 
     PREFIX_URL = '/devices/devicerecords'
-    URL_SUFFIX = None
-    REQUIRED_FOR_POST = ['interfaceName', 'selectedNetworks', 'gateway']
-    REQUIRED_FOR_PUT = ['id', 'device_id']
+    url_suffix = None
+    required_for_post = ['interfaceName', 'selectedNetworks', 'gateway']
+    required_for_put = ['id', 'device_id']
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

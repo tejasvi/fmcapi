@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 
 
@@ -7,7 +7,7 @@ class Realms(APIClassTemplate):
     The Realms Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/realms'
+    url_suffix = '/object/realms'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

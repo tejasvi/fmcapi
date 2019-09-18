@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from .ftdnatpolicies import FTDNatPolicies
 import logging
 
@@ -9,7 +9,7 @@ class NatRules(APIClassTemplate):
     """
 
     PREFIX_URL = '/policy/ftdnatpolicies'
-    VALID_CHARACTERS_FOR_NAME = """[.\w\d_\- ]"""
+    valid_characters_for_name = """[.\w\d_\- ]"""
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 import warnings
 
@@ -8,7 +8,7 @@ class VariableSets(APIClassTemplate):
     The VariableSets Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/variablesets'
+    url_suffix = '/object/variablesets'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

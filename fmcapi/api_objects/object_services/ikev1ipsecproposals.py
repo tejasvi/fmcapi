@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 
 
@@ -7,12 +7,12 @@ class IKEv1IpsecProposals(APIClassTemplate):
     The IKEv1IpsecProposals Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/ikev1ipsecproposals'
-    REQUIRED_FOR_POST = ['name', 'espEncryption', 'espHash']
+    url_suffix = '/object/ikev1ipsecproposals'
+    required_for_post = ['name', 'espEncryption', 'espHash']
     VALID_FOR_ENCRYPTION = ['DES', '3DES', 'AES-128', 'AES-192', 'AES-256', 'ESP-NULL']
     VALID_FOR_HASH = ['NONE', 'MD5', 'SHA']
-    VALID_CHARACTERS_FOR_NAME = """[.\w\d_\- ]"""
-    FIRST_SUPPORTED_FMC_VERSION = '6.3'
+    valid_characters_for_name = """[.\w\d_\- ]"""
+    first_supported_fmc_version = '6.3'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

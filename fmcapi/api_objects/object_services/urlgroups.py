@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from .urls import URLs
 import logging
 import warnings
@@ -9,10 +9,10 @@ class URLGroups(APIClassTemplate):
     The URLGroups Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/urlgroups'
+    url_suffix = '/object/urlgroups'
 
     # Technically you can have objects OR literals but I'm not set up for "OR" logic, yet.
-    REQUIRED_FOR_POST = ['name', 'objects']
+    required_for_post = ['name', 'objects']
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

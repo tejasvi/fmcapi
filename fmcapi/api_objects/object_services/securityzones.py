@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 import warnings
 
@@ -8,8 +8,8 @@ class SecurityZones(APIClassTemplate):
     The SecurityZones Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/securityzones'
-    REQUIRED_FOR_POST = ['name', 'interfaceMode']
+    url_suffix = '/object/securityzones'
+    required_for_post = ['name', 'interfaceMode']
     FILTER_BY_NAME = True
 
     def __init__(self, fmc, **kwargs):

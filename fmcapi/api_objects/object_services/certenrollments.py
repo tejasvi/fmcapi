@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 import warnings
 
@@ -8,7 +8,7 @@ class CertEnrollments(APIClassTemplate):
     The CertEnrollments Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/certenrollments'
+    url_suffix = '/object/certenrollments'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

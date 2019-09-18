@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from .devicerecords import Device
 import logging
 
@@ -9,7 +9,7 @@ class StaticRoutes(APIClassTemplate):
     """
 
     PREFIX_URL = '/devices/devicerecords'
-    URL_SUFFIX = None
+    url_suffix = None
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

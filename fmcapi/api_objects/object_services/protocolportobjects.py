@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 import warnings
 
@@ -8,8 +8,8 @@ class ProtocolPortObjects(APIClassTemplate):
     The ProtocolPortObjects in the FMC.
     """
 
-    URL_SUFFIX = '/object/protocolportobjects'
-    REQUIRED_FOR_POST = ['name', 'port', 'protocol']
+    url_suffix = '/object/protocolportobjects'
+    required_for_post = ['name', 'port', 'protocol']
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

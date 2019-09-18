@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 import warnings
 
@@ -8,7 +8,7 @@ class ApplicationTypes(APIClassTemplate):
     The ApplicationTypes Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/applicationtypes'
+    url_suffix = '/object/applicationtypes'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

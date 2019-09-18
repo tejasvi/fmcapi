@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 
 
@@ -7,7 +7,7 @@ class EndPointDeviceTypes(APIClassTemplate):
     The EndPointDeviceTypes Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/endpointdevicetypes'
+    url_suffix = '/object/endpointdevicetypes'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

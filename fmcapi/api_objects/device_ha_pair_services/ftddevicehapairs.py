@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from fmcapi.api_objects.device_services.devicerecords import Device
 import logging
 import warnings
@@ -9,9 +9,9 @@ class FTDDeviceHAPairs(APIClassTemplate):
     The FTDDeviceHAPairs Object in the FMC.
     """
 
-    URL_SUFFIX = '/devicehapairs/ftddevicehapairs'
-    REQUIRED_FOR_POST = ['primary', 'secondary', 'ftdHABootstrap']
-    REQUIRED_FOR_PUT = ['id']
+    url_suffix = '/devicehapairs/ftddevicehapairs'
+    required_for_post = ['primary', 'secondary', 'ftdHABootstrap']
+    required_for_put = ['id']
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

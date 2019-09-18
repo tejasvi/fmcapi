@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 
 
@@ -7,7 +7,7 @@ class RealmUserGroups(APIClassTemplate):
     The RealmUserGroups Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/realmusergroups'
+    url_suffix = '/object/realmusergroups'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

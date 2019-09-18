@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from fmcapi.api_objects.object_services.securityzones import SecurityZones
 from fmcapi.api_objects.device_services.devicerecords import Device
 import logging
@@ -9,10 +9,10 @@ class PhysicalInterfaces(APIClassTemplate):
     """
     The Physical Interface Object in the FMC.
     """
-    VALID_CHARACTERS_FOR_NAME = """[.\w\d_\-\/\. ]"""
+    valid_characters_for_name = """[.\w\d_\-\/\. ]"""
     PREFIX_URL = '/devices/devicerecords'
-    URL_SUFFIX = None
-    REQUIRED_FOR_PUT = ['id', 'device_id']
+    url_suffix = None
+    required_for_put = ['id', 'device_id']
     VALID_FOR_IPV4 = ['static', 'dhcp', 'pppoe']
     VALID_FOR_MODE = ['INLINE', 'PASSIVE', 'TAP', 'ERSPAN', 'NONE']
     VALID_FOR_MTU = range(64, 9000)

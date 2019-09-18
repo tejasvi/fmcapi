@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 
 
@@ -7,8 +7,8 @@ class TaskStatuses(APIClassTemplate):
     The Task Status Object in the FMC.
     """
 
-    URL_SUFFIX = '/job/taskstatuses'
-    VALID_CHARACTERS_FOR_NAME = """[.\w\d_\- ]"""
+    url_suffix = '/job/taskstatuses'
+    valid_characters_for_name = """[.\w\d_\- ]"""
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 
 
@@ -7,8 +7,8 @@ class IKEv1Policies(APIClassTemplate):
     The IKEv1Policies Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/ikev1policies'
-    REQUIRED_FOR_POST = ['name',
+    url_suffix = '/object/ikev1policies'
+    required_for_post = ['name',
                          'encryption',
                          'hash',
                          'diffieHellmanGroup',
@@ -16,8 +16,8 @@ class IKEv1Policies(APIClassTemplate):
                          'authenticationMethod']
     VALID_FOR_ENCRYPTION = ['DES', '3DES', 'AES-128', 'AES-192', 'AES-256']
     VALID_FOR_HASH = ['MD5', 'SHA']
-    VALID_CHARACTERS_FOR_NAME = """[.\w\d_\- ]"""
-    FIRST_SUPPORTED_FMC_VERSION = '6.3'
+    valid_characters_for_name = """[.\w\d_\- ]"""
+    first_supported_fmc_version = '6.3'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

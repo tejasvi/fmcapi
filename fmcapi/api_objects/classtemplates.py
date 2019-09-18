@@ -1,36 +1,117 @@
 """Super class that is inherited by all API objects."""
-from .helper_functions import *
+from fmcapi.api_objects.helper_functions import syntax_correcter
+from abc import ABCMeta, abstractmethod
+import json
 import logging
 
 logging.debug(f"In the {__name__} module.")
 
 
-class APIClassTemplate(object):
+class BaseData(object):
     """
-    This class is the base framework for all the objects in the FMC.
+    The BaseData base class is used to manage all the keys and their respective values.  If anything "special" is
+    required for a specific key, then the format_data or parse_kwargs can be overridden in the child class.
     """
 
-    REQUIRED_FOR_POST = ['name']
-    REQUIRED_FOR_PUT = ['id']
-    REQUIRED_FOR_DELETE = ['id']
-    REQUIRED_FOR_GET = ['']
+    @property
+    def key(self):
+        return self.__class__.__name__.lower()
+
+    def __init__(self, **kwargs):
+        print(f'Init for {self.key}')
+        self.value = None
+        self.parse_kwargs(**kwargs)
+
+    def format_data(self):
+        print(f'Formatting data for {self.key}')
+        if self.value:
+            return {self.key: self.value}
+        return {}
+
+    def parse_kwargs(self, **kwargs):
+        print(f'Parsing kwargs for {self.key}')
+        if self.key in kwargs:
+            self.value = kwargs[self.key]
+
+
+class APIClassTemplate(metaclass=ABCMeta):
+    """
+    This class is the base framework for most of the objects in the FMC.
+    """
+
     FILTER_BY_NAME = False
     URL = ''
-    URL_SUFFIX = ''
-    VALID_CHARACTERS_FOR_NAME = """[.\w\d_\-]"""
-    FIRST_SUPPORTED_FMC_VERSION = '6.1'
+
+    @property
+    @abstractmethod
+    def valid_characters_for_name(self):
+        return """[.\w\d_\-]"""
+
+    @property
+    @abstractmethod
+    def first_supported_fmc_version(self):
+        return '6.1'
+
+    @property
+    @abstractmethod
+    def url_suffix(self):
+        return ''
+
+    @property
+    @abstractmethod
+    def required_for_post(self):
+        return ['name']
+
+    @property
+    @abstractmethod
+    def required_for_put(self):
+        return ['id']
+
+    @property
+    @abstractmethod
+    def required_for_delete(self):
+        return ['id']
+
+    @property
+    @abstractmethod
+    def required_for_get(self):
+        return []
+
+    @property
+    @abstractmethod
+    def keys(self):
+        return []
+
+    @property
+    @abstractmethod
+    def type(self):
+        return ''
 
     @property
     def show_json(self):
         return self.format_data()
 
     def __init__(self, fmc, **kwargs):
+        # This loads all the data classes as defined in the keys
         logging.debug("In __init__() for APIClassTemplate class.")
         self.fmc = fmc
-        self.URL = f'{self.fmc.configuration_url}{self.URL_SUFFIX}'
+        self._data = {data().key: data() for data in self.keys}
+        self.parse_kwargs(**kwargs)
+        self.URL = f'{self.fmc.configuration_url}{self.url_suffix}'
 
     def parse_kwargs(self, **kwargs):
         logging.debug("In parse_kwargs() for APIClassTemplate class.")
+        for data in self._data.values():
+            data.parse_kwargs(**kwargs)
+
+    def format_data(self):
+        logging.debug("In format_data() for APIClassTemplate class.")
+        json_data = {}
+        for data in self._data.values():
+            json_data.update(data.format_data())
+        return json_data
+
+    def parse_kwargs_old(self, **kwargs):
         if 'limit' in kwargs:
             self.limit = kwargs['limit']
         else:
@@ -38,7 +119,7 @@ class APIClassTemplate(object):
         if 'offset' in kwargs:
             self.offset = kwargs['offset']
         if 'name' in kwargs:
-            self.name = syntax_correcter(kwargs['name'], permitted_syntax=self.VALID_CHARACTERS_FOR_NAME)
+            self.name = syntax_correcter(kwargs['name'], permitted_syntax=self.valid_characters_for_name)
             if self.name != kwargs['name']:
                 logging.info(f"Adjusting name '{kwargs['name']}' to '{self.name}' due to invalid characters.")
         if 'description' in kwargs:
@@ -66,14 +147,11 @@ class APIClassTemplate(object):
         else:
             self.dry_run = False
 
-    def format_data(self):
-        logging.debug("In format_data() for APIClassTemplate class.")
-
     def valid_for_get(self):
         logging.debug("In valid_for_get() for APIClassTemplate class.")
-        if self.REQUIRED_FOR_GET == ['']:
+        if self.required_for_get == ['']:
             return True
-        for item in self.REQUIRED_FOR_GET:
+        for item in self.required_for_get:
             if item not in self.__dict__:
                 return False
         return True
@@ -86,7 +164,7 @@ class APIClassTemplate(object):
         """
         logging.debug("In get() for APIClassTemplate class.")
         self.parse_kwargs(**kwargs)
-        if self.fmc.serverVersion < self.FIRST_SUPPORTED_FMC_VERSION:
+        if self.fmc.serverVersion < self.first_supported_fmc_version:
             logging.error(f'Your FMC version, {self.fmc.serverVersion} does not support GET of this feature.')
             return {'items': []}
         if self.valid_for_get():
@@ -146,14 +224,14 @@ class APIClassTemplate(object):
 
     def valid_for_post(self):
         logging.debug("In valid_for_post() for APIClassTemplate class.")
-        for item in self.REQUIRED_FOR_POST:
+        for item in self.required_for_post:
             if item not in self.__dict__:
                 return False
         return True
 
     def post(self, **kwargs):
         logging.debug("In post() for APIClassTemplate class.")
-        if self.fmc.serverVersion < self.FIRST_SUPPORTED_FMC_VERSION:
+        if self.fmc.serverVersion < self.first_supported_fmc_version:
             logging.error(f'Your FMC version, {self.fmc.serverVersion} does not support POST of this feature.')
             return False
         if 'id' in self.__dict__:
@@ -183,7 +261,7 @@ class APIClassTemplate(object):
 
     def valid_for_put(self):
         logging.debug("In valid_for_put() for APIClassTemplate class.")
-        for item in self.REQUIRED_FOR_PUT:
+        for item in self.required_for_put:
             if item not in self.__dict__:
                 return False
         return True
@@ -191,7 +269,7 @@ class APIClassTemplate(object):
     def put(self, **kwargs):
         logging.debug("In put() for APIClassTemplate class.")
         self.parse_kwargs(**kwargs)
-        if self.fmc.serverVersion < self.FIRST_SUPPORTED_FMC_VERSION:
+        if self.fmc.serverVersion < self.first_supported_fmc_version:
             logging.error(f'Your FMC version, {self.fmc.serverVersion} does not support PUT of this feature.')
             return False
         if self.valid_for_put():
@@ -215,7 +293,7 @@ class APIClassTemplate(object):
 
     def valid_for_delete(self):
         logging.debug("In valid_for_delete() for APIClassTemplate class.")
-        for item in self.REQUIRED_FOR_DELETE:
+        for item in self.required_for_delete:
             if item not in self.__dict__:
                 return False
         return True
@@ -223,7 +301,7 @@ class APIClassTemplate(object):
     def delete(self, **kwargs):
         logging.debug("In delete() for APIClassTemplate class.")
         self.parse_kwargs(**kwargs)
-        if self.fmc.serverVersion < self.FIRST_SUPPORTED_FMC_VERSION:
+        if self.fmc.serverVersion < self.first_supported_fmc_version:
             logging.error(f'Your FMC version, {self.fmc.serverVersion} does not support DELETE of this feature.')
             return False
         if self.valid_for_delete():

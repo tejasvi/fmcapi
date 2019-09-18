@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from .vlantags import VlanTags
 from fmcapi.api_objects.helper_functions import validate_vlans
 import logging
@@ -10,10 +10,10 @@ class VlanGroupTags(APIClassTemplate):
     The VlanGroupTags Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/vlangrouptags'
+    url_suffix = '/object/vlangrouptags'
 
     # Technically you can have objects OR literals but I'm not set up for "OR" logic, yet.
-    REQUIRED_FOR_POST = ['name', 'objects']
+    required_for_post = ['name', 'objects']
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

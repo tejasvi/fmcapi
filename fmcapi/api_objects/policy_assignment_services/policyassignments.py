@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from fmcapi.api_objects.policy_services.accesspolicies import AccessPolicies
 from fmcapi.api_objects.device_services.devicerecords import Device
 from fmcapi.api_objects.device_ha_pair_services.ftddevicehapairs import FTDDeviceHAPairs
@@ -10,9 +10,9 @@ class PolicyAssignments(APIClassTemplate):
     """
     The PolicyAssignments Object in the FMC.
     """
-    REQUIRED_FOR_POST = ['targets', 'policy']
-    REQUIRED_FOR_PUT = ['id', 'targets', 'policy']
-    URL_SUFFIX = '/assignment/policyassignments'
+    required_for_post = ['targets', 'policy']
+    required_for_put = ['id', 'targets', 'policy']
+    url_suffix = '/assignment/policyassignments'
     FILTER_BY_NAME = True
 
     def __init__(self, fmc, **kwargs):

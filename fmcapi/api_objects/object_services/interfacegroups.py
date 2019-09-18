@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from fmcapi.api_objects.device_services.physicalinterfaces import PhysicalInterfaces
 import logging
 import warnings
@@ -9,9 +9,9 @@ class InterfaceGroups(APIClassTemplate):
     The InterfaceGroups Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/interfacegroups'
-    REQUIRED_FOR_POST = ['name', 'interfaceMode']
-    REQUIRED_FOR_PUT = ['id']
+    url_suffix = '/object/interfacegroups'
+    required_for_post = ['name', 'interfaceMode']
+    required_for_put = ['id']
     FILTER_BY_NAME = True
 
     def __init__(self, fmc, **kwargs):

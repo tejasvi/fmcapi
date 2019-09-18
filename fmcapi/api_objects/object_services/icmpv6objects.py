@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 import warnings
 
@@ -8,8 +8,8 @@ class ICMPv6Objects(APIClassTemplate):
     The ICMPv6Objects Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/icmpv6objects'
-    VALID_CHARACTERS_FOR_NAME = """[.\w\d_\- ]"""
+    url_suffix = '/object/icmpv6objects'
+    valid_characters_for_name = """[.\w\d_\- ]"""
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

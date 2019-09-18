@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 import warnings
 
@@ -8,8 +8,8 @@ class AccessPolicies(APIClassTemplate):
     The AccessPolicies Object in the FMC.
     """
 
-    URL_SUFFIX = '/policy/accesspolicies'
-    REQUIRED_FOR_POST = ['name']
+    url_suffix = '/policy/accesspolicies'
+    required_for_post = ['name']
     DEFAULT_ACTION_OPTIONS = ['BLOCK', 'NETWORK_DISCOVERY', 'IPS']  # Not implemented yet.
     FILTER_BY_NAME = True
 

@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from fmcapi.api_objects.device_services.devicerecords import DeviceRecords
 from fmcapi.api_objects.device_ha_pair_services.ftddevicehapairs import FTDDeviceHAPairs
 import logging
@@ -10,7 +10,7 @@ class DeviceGroupRecords(APIClassTemplate):
     The DeviceGroupRecords Object in the FMC.
     """
 
-    URL_SUFFIX = '/devicegroups/devicegrouprecords'
+    url_suffix = '/devicegroups/devicegrouprecords'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

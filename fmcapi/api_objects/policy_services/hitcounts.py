@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from .accesspolicies import AccessPolicies
 from fmcapi.api_objects.device_services.devicerecords import DeviceRecords
 from .prefilterpolicies import PreFilterPolicies
@@ -12,11 +12,11 @@ class HitCounts(APIClassTemplate):
     """
 
     PREFIX_URL = '/policy/accesspolicies'
-    REQUIRED_FOR_PUT = ['acp_id', 'device_id']
-    REQUIRED_FOR_DELETE = ['acp_id', 'device_id']
-    REQUIRED_FOR_GET = ['acp_id', 'device_id']
-    VALID_CHARACTERS_FOR_NAME = """[.\w\d_\- ]"""
-    FIRST_SUPPORTED_FMC_VERSION = '6.4'
+    required_for_put = ['acp_id', 'device_id']
+    required_for_delete = ['acp_id', 'device_id']
+    required_for_get = ['acp_id', 'device_id']
+    valid_characters_for_name = """[.\w\d_\- ]"""
+    first_supported_fmc_version = '6.4'
 
     @property
     def URL_SUFFIX(self):

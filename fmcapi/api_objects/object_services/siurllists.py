@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 
 
@@ -7,7 +7,7 @@ class SIUrlLists(APIClassTemplate):
     The SIUrlLists Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/siurllists'
+    url_suffix = '/object/siurllists'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

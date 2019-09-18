@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from .accesspolicies import AccessPolicies
 import logging
 
@@ -9,8 +9,8 @@ class DefaultActions(APIClassTemplate):
     """
 
     PREFIX_URL = '/policy/accesspolicies'
-    REQUIRED_FOR_PUT = ['acp_id', 'id', 'action']
-    REQUIRED_FOR_GET = ['acp_id']
+    required_for_put = ['acp_id', 'id', 'action']
+    required_for_get = ['acp_id']
     VALID_ACTION = ['BLOCK', 'TRUST', 'PERMIT', 'NETWORK_DISCOVERY']
 
     def __init__(self, fmc, **kwargs):
@@ -18,7 +18,7 @@ class DefaultActions(APIClassTemplate):
         super().__init__(fmc, **kwargs)
         self.parse_kwargs(**kwargs)
         self.type = 'AccessPolicyDefaultAction'
-        self.URL = f'{self.URL}{self.URL_SUFFIX}'
+        self.URL = f'{self.URL}{self.url_suffix}'
 
     def format_data(self):
         logging.debug("In format_data() for FilePolicies class.")

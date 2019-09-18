@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from fmcapi.api_objects.helper_functions import *
 from .networkaddresses import NetworkAddresses
 import logging
@@ -10,10 +10,10 @@ class NetworkGroups(APIClassTemplate):
     The NetworkGroups Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/networkgroups'
+    url_suffix = '/object/networkgroups'
 
     # Technically you can have objects OR literals but I'm not set up for "OR" logic, yet.
-    REQUIRED_FOR_POST = ['name']
+    required_for_post = ['name']
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

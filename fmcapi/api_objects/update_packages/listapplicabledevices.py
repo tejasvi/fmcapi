@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from .upgradepackages import UpgradePackages
 import logging
 import warnings
@@ -9,7 +9,7 @@ class ListApplicableDevices(APIClassTemplate):
     The ListApplicableDevices Object in the FMC.
     """
 
-    URL_SUFFIX = '/updates/upgradepackages'
+    url_suffix = '/updates/upgradepackages'
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

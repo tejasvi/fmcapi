@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 import logging
 import warnings
 
@@ -8,8 +8,8 @@ class URLs(APIClassTemplate):
     The URLs Object in the FMC.
     """
 
-    URL_SUFFIX = '/object/urls'
-    REQUIRED_FOR_POST = ['name', 'url']
+    url_suffix = '/object/urls'
+    required_for_post = ['name', 'url']
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)

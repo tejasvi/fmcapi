@@ -1,4 +1,4 @@
-from fmcapi.api_objects.apiclasstemplate import APIClassTemplate
+from fmcapi.api_objects.classtemplates import APIClassTemplate
 from .ftdnatpolicies import FTDNatPolicies
 from fmcapi.api_objects.object_services.networkaddresses import NetworkAddresses
 from fmcapi.api_objects.object_services.interfaceobjects import InterfaceObjects
@@ -12,7 +12,7 @@ class AutoNatRules(APIClassTemplate):
     """
 
     PREFIX_URL = '/policy/ftdnatpolicies'
-    REQUIRED_FOR_POST = ["nat_id"]
+    required_for_post = ["nat_id"]
 
     def __init__(self, fmc, **kwargs):
         super().__init__(fmc, **kwargs)
