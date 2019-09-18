@@ -2,13 +2,18 @@ from unittest import mock
 from abc import ABCMeta, abstractmethod
 from fmcapi.api_objects.helper_functions import get_networkaddress_type
 
+#
+# This base class would be used to manage all the keys and their respective values
+# If anything "special" is required for a specific key, then the format_data or parse_kwargs can be overridden in the
+# child class
+#
 
-class BaseData(metaclass=ABCMeta):
+
+class BaseData(object):
 
     @property
-    @abstractmethod
     def key(self):
-        return ''
+        return self.__class__.__name__.lower()
 
     def __init__(self, **kwargs):
         print(f'Init for {self.key}')
@@ -19,7 +24,7 @@ class BaseData(metaclass=ABCMeta):
         print(f'Formatting data for {self.key}')
         if self.value:
             return {self.key: self.value}
-        return None
+        return {}
 
     def parse_kwargs(self, **kwargs):
         print(f'Parsing kwargs for {self.key}')
@@ -27,47 +32,51 @@ class BaseData(metaclass=ABCMeta):
             self.value = kwargs[self.key]
 
 
+#
+# The data classes only need to define what is different, which in most cases is nothing! But if you
+# need to do some special processing in any method you can override here
+#
+
+
 class Id(BaseData):
-    @property
-    def key(self):
-        return 'id'
+    ...
 
 
 class Name(BaseData):
-    @property
-    def key(self):
-        return 'name'
+    ...
 
 
 class Type(BaseData):
-    @property
-    def key(self):
-        return 'type'
+    ...
 
 
 class Objects(BaseData):
-    @property
-    def key(self):
-        return 'objects'
+    ...
 
 
 class Literals(BaseData):
-    @property
-    def key(self):
-        return 'literals'
+
+    # For example, lets override the key name when the json is built
+    def format_data(self):
+        print(f'Formatting data for {self.key}')
+        if self.value:
+            return {"changed_key_name": self.value}
+        return {}
 
 
 class Value(BaseData):
-    @property
-    def key(self):
-        return 'value'
+    ...
 
 
 class Description(BaseData):
-    @property
-    def key(self):
-        return 'description'
+    ...
 
+
+#
+# This base class would be used to manage all the API operations (which is your APIClassTemplate now)
+# If anything "special" is required for a specific operation, then it can be overridden in the child class
+#  The abstract method enforce that the methods must be overridden in the child class
+#
 
 class BaseAPI(metaclass=ABCMeta):
 
@@ -92,6 +101,7 @@ class BaseAPI(metaclass=ABCMeta):
         return ''
 
     def __init__(self, fmc, **kwargs):
+        # This loads all the data classes as defined in the keys
         self._data = {data().key: data() for data in self.keys}
         self.parse_kwargs(**kwargs)
 
@@ -102,10 +112,13 @@ class BaseAPI(metaclass=ABCMeta):
     def format_data(self):
         json_data = {}
         for data in self._data.values():
-            value = data.format_data()
-            if value:
-                json_data.update(value)
+            json_data.update(data.format_data())
         return json_data
+
+
+#
+# Again the child classes only need to define what is different, which in most cases will be just the absract methods
+#
 
 
 class NetworkGroups(BaseAPI):
