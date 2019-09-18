@@ -1,6 +1,6 @@
 """Super class that is inherited by all API objects."""
 from fmcapi.api_objects.helper_functions import syntax_correcter
-from abc import ABCMeta, abstractmethod
+from abc import ABCMeta, abstractmethod, ABC
 import json
 import logging
 
@@ -34,6 +34,38 @@ class BaseData(object):
             self.value = kwargs[self.key]
 
 
+class Id(BaseData, ABC):
+    ...
+
+
+class Name(BaseData, ABC):
+    ...
+
+
+class Type(BaseData, ABC):
+    ...
+
+
+class Objects(BaseData, ABC):
+    ...
+
+
+class Literals(BaseData, ABC):
+    ...
+
+
+class Value(BaseData, ABC):
+    ...
+
+
+class Description(BaseData, ABC):
+    ...
+
+
+class Limit(BaseData, ABC):
+    ...
+
+
 class APIClassTemplate(metaclass=ABCMeta):
     """
     This class is the base framework for most of the objects in the FMC.
@@ -41,11 +73,6 @@ class APIClassTemplate(metaclass=ABCMeta):
 
     FILTER_BY_NAME = False
     URL = ''
-
-    @property
-    @abstractmethod
-    def valid_characters_for_name(self):
-        return """[.\w\d_\-]"""
 
     @property
     @abstractmethod
@@ -79,6 +106,11 @@ class APIClassTemplate(metaclass=ABCMeta):
 
     @property
     @abstractmethod
+    def valid_characters_for_name(self):
+        return """"[.\w\d_\-]"""
+
+    @property
+    @abstractmethod
     def keys(self):
         return []
 
@@ -86,6 +118,23 @@ class APIClassTemplate(metaclass=ABCMeta):
     @abstractmethod
     def type(self):
         return ''
+
+    @property
+    @abstractmethod
+    def limit(self):
+        if not self.key:
+            self.limit = kwargs['limit']
+        else:
+            self.limit = self.fmc.limit
+
+    @property
+    @abstractmethod
+    def name(self):
+        orginal_name = self.value
+        self.value = syntax_correcter(orginal_name, permitted_syntax=self.valid_characters_for_name)
+        if self.value != orginal_name:
+            logging.info(f"Adjusting provided name to '{self.value}' due to invalid characters.")
+
 
     @property
     def show_json(self):
@@ -112,10 +161,6 @@ class APIClassTemplate(metaclass=ABCMeta):
         return json_data
 
     def parse_kwargs_old(self, **kwargs):
-        if 'limit' in kwargs:
-            self.limit = kwargs['limit']
-        else:
-            self.limit = self.fmc.limit
         if 'offset' in kwargs:
             self.offset = kwargs['offset']
         if 'name' in kwargs:
