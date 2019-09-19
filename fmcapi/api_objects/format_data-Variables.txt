@@ -17,6 +17,7 @@ countries
 dataSize
 defaultAction
 defaultdomain
+description
 destinationInterface
 destinationNetworks
 destinationPorts
@@ -147,7 +148,6 @@ standyMACAddress
 subIntfId
 sw_version
 tag
-targets
 targets
 threshold
 timeout

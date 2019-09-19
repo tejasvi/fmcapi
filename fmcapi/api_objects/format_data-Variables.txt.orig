@@ -1,5 +1,6 @@
 id
 name
+description
 members
 physicalInterface
 failoverActiveMac
