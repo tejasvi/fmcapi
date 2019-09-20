@@ -34,35 +34,683 @@ class BaseData(object):
             self.value = kwargs[self.key]
 
 
-class Id(BaseData, ABC):
+class accessPolicy(BaseData, ABC):
     ...
 
 
-class Name(BaseData, ABC):
+class action(BaseData, ABC):
     ...
 
 
-class Type(BaseData, ABC):
+class activeMACAddress(BaseData, ABC):
     ...
 
 
-class Objects(BaseData, ABC):
+class appConditions(BaseData, ABC):
     ...
 
 
-class Literals(BaseData, ABC):
+class applications(BaseData, ABC):
     ...
 
 
-class Value(BaseData, ABC):
+class arpConfig(BaseData, ABC):
     ...
 
 
-class Description(BaseData, ABC):
+class authenticationMethod(BaseData, ABC):
     ...
 
 
-class Limit(BaseData, ABC):
+class bridgeGroupId(BaseData, ABC):
+    ...
+
+
+class checksumURL(BaseData, ABC):
+    ...
+
+
+class code(BaseData, ABC):
+    ...
+
+
+class conditions(BaseData, ABC):
+    ...
+
+
+class containerType(BaseData, ABC):
+    ...
+
+
+class continentId(BaseData, ABC):
+    ...
+
+
+class continents(BaseData, ABC):
+    ...
+
+
+class continentUUID(BaseData, ABC):
+    ...
+
+
+class countries(BaseData, ABC):
+    ...
+
+
+class dataSize(BaseData, ABC):
+    ...
+
+
+class defaultAction(BaseData, ABC):
+    ...
+
+
+class defaultdomain(BaseData, ABC):
+    ...
+
+
+class description(BaseData, ABC):
+    ...
+
+
+class destinationInterface(BaseData, ABC):
+    ...
+
+
+class destinationNetworks(BaseData, ABC):
+    ...
+
+
+class destinationPorts(BaseData, ABC):
+    ...
+
+
+class destinationZones(BaseData, ABC):
+    ...
+
+
+class diffieHellmanGroup(BaseData, ABC):
+    ...
+
+
+class dns(BaseData, ABC):
+    ...
+
+
+class dnsResolution(BaseData, ABC):
+    ...
+
+
+class dnsservers(BaseData, ABC):
+    ...
+
+
+class enableAntiSpoofing(BaseData, ABC):
+    ...
+
+
+class enabled(BaseData, ABC):
+    ...
+
+
+class enableDNSLookup(BaseData, ABC):
+    ...
+
+
+class encryption(BaseData, ABC):
+    ...
+
+
+class encryptionAlgorithms(BaseData, ABC):
+    ...
+
+
+class erspanFlowId(BaseData, ABC):
+    ...
+
+
+class erspanSourceIP(BaseData, ABC):
+    ...
+
+
+class espEncryption(BaseData, ABC):
+    ...
+
+
+class espHash(BaseData, ABC):
+    ...
+
+
+class etherChannelId(BaseData, ABC):
+    ...
+
+
+class failoverActiveMac(BaseData, ABC):
+    ...
+
+
+class failoverStandyMac(BaseData, ABC):
+    ...
+
+
+class fallThrough(BaseData, ABC):
+    ...
+
+
+class feedURL(BaseData, ABC):
+    ...
+
+
+class filePolicy(BaseData, ABC):
+    ...
+
+
+class forceBreak(BaseData, ABC):
+    ...
+
+
+class fqName(BaseData, ABC):
+    ...
+
+
+class fragmentReassembly(BaseData, ABC):
+    ...
+
+
+class frequency(BaseData, ABC):
+    ...
+
+
+class ftdHABoostrap(BaseData, ABC):
+    ...
+
+
+class gateway(BaseData, ABC):
+    ...
+
+
+class hardware(BaseData, ABC):
+    ...
+
+
+class hash(BaseData, ABC):
+    ...
+
+
+class healthPolicy(BaseData, ABC):
+    ...
+
+
+class healthStatus(BaseData, ABC):
+    ...
+
+
+class hostName(BaseData, ABC):
+    ...
+
+
+class icmpType(BaseData, ABC):
+    ...
+
+
+class id(BaseData, ABC):
+    ...
+
+
+class ifname(BaseData, ABC):
+    ...
+
+
+class integrityAlgorithms(BaseData, ABC):
+    ...
+
+
+class interfaceInOriginalDestination(BaseData, ABC):
+    ...
+
+
+class interfaceInTranslatedNetwork(BaseData, ABC):
+    ...
+
+
+class interfaceInTranslatedSource(BaseData, ABC):
+    ...
+
+
+class interfaceIpv6(BaseData, ABC):
+    ...
+
+
+class interfaceMode(BaseData, ABC):
+    ...
+
+
+class interfaceName(BaseData, ABC):
+    ...
+
+
+class interfaceObjects(BaseData, ABC):
+    ...
+
+
+class interfaces(BaseData, ABC):
+    ...
+
+
+class ipAddress(BaseData, ABC):
+    ...
+
+
+class ipsPolicy(BaseData, ABC):
+    ...
+
+
+class ipv4(BaseData, ABC):
+    ...
+
+
+class ipv4Configuration(BaseData, ABC):
+    ...
+
+
+class ipv6(BaseData, ABC):
+    ...
+
+
+class ipv6Configuration(BaseData, ABC):
+    ...
+
+
+class iseId(BaseData, ABC):
+    ...
+
+
+class iso2(BaseData, ABC):
+    ...
+
+
+class iso3(BaseData, ABC):
+    ...
+
+
+class isPartofContainer(BaseData, ABC):
+    ...
+
+
+class isTunneled(BaseData, ABC):
+    ...
+
+
+class lacpMode(BaseData, ABC):
+    ...
+
+
+class license_caps(BaseData, ABC):
+    ...
+
+
+class lifetimeInSeconds(BaseData, ABC):
+    ...
+
+
+class literals(BaseData, ABC):
+    ...
+
+
+class loadBalancing(BaseData, ABC):
+    ...
+
+
+class logBegin(BaseData, ABC):
+    ...
+
+
+class logEnd(BaseData, ABC):
+    ...
+
+
+class logFiles(BaseData, ABC):
+    ...
+
+
+class maclLearn(BaseData, ABC):
+    ...
+
+
+class macTable(BaseData, ABC):
+    ...
+
+
+class managementOnly(BaseData, ABC):
+    ...
+
+
+class maxActivePhysicalInterface(BaseData, ABC):
+    ...
+
+
+class members(BaseData, ABC):
+    ...
+
+
+class metricValue(BaseData, ABC):
+    ...
+
+
+class minActivePhysicalInterface(BaseData, ABC):
+    ...
+
+
+class mode(BaseData, ABC):
+    ...
+
+
+class model(BaseData, ABC):
+    ...
+
+
+class modelId(BaseData, ABC):
+    ...
+
+
+class modelNumber(BaseData, ABC):
+    ...
+
+
+class modelType(BaseData, ABC):
+    ...
+
+
+class monitorAddress(BaseData, ABC):
+    ...
+
+
+class monitorForFailures(BaseData, ABC):
+    ...
+
+
+class MTU(BaseData, ABC):
+    ...
+
+
+class name(BaseData, ABC):
+    ...
+
+
+class natID(BaseData, ABC):
+    ...
+
+
+class natType(BaseData, ABC):
+    ...
+
+
+class netToNet(BaseData, ABC):
+    ...
+
+
+class noOfPackets(BaseData, ABC):
+    ...
+
+
+class noProxyArp(BaseData, ABC):
+    ...
+
+
+class objects(BaseData, ABC):
+    ...
+
+
+class originalDestination(BaseData, ABC):
+    ...
+
+
+class originalDestinationPort(BaseData, ABC):
+    ...
+
+
+class originalNetwork(BaseData, ABC):
+    ...
+
+
+class originalPort(BaseData, ABC):
+    ...
+
+
+class originalSource(BaseData, ABC):
+    ...
+
+
+class originalSourceNetworks(BaseData, ABC):
+    ...
+
+
+class originalSourcePort(BaseData, ABC):
+    ...
+
+
+class overridable(BaseData, ABC):
+    ...
+
+
+class overrides(BaseData, ABC):
+    ...
+
+
+class overrideTargetId(BaseData, ABC):
+    ...
+
+
+class patOptions(BaseData, ABC):
+    ...
+
+
+class physicalInterface(BaseData, ABC):
+    ...
+
+
+class policy(BaseData, ABC):
+    ...
+
+
+class port(BaseData, ABC):
+    ...
+
+
+class prfIntegrityAlgorithms(BaseData, ABC):
+    ...
+
+
+class primary(BaseData, ABC):
+    ...
+
+
+class primaryInterface(BaseData, ABC):
+    ...
+
+
+class priority(BaseData, ABC):
+    ...
+
+
+class protocol(BaseData, ABC):
+    ...
+
+
+class pushUpgradeFileOnly(BaseData, ABC):
+    ...
+
+
+class realm(BaseData, ABC):
+    ...
+
+
+class realmUuid(BaseData, ABC):
+    ...
+
+
+class redundantId(BaseData, ABC):
+    ...
+
+
+class regKey(BaseData, ABC):
+    ...
+
+
+class retries(BaseData, ABC):
+    ...
+
+
+class routeLookup(BaseData, ABC):
+    ...
+
+
+class routeTracking(BaseData, ABC):
+    ...
+
+
+class secondary(BaseData, ABC):
+    ...
+
+
+class secondaryInterface(BaseData, ABC):
+    ...
+
+
+class securityZone(BaseData, ABC):
+    ...
+
+
+class selectedInterfaces(BaseData, ABC):
+    ...
+
+
+class selectedNetworks(BaseData, ABC):
+    ...
+
+
+class sendEventsToFMC(BaseData, ABC):
+    ...
+
+
+class serviceProtocol(BaseData, ABC):
+    ...
+
+
+class slaId(BaseData, ABC):
+    ...
+
+
+class sourceInterface(BaseData, ABC):
+    ...
+
+
+class sourceNetworks(BaseData, ABC):
+    ...
+
+
+class sourcePorts(BaseData, ABC):
+    ...
+
+
+class sourceZones(BaseData, ABC):
+    ...
+
+
+class standyMACAddress(BaseData, ABC):
+    ...
+
+
+class subIntfId(BaseData, ABC):
+    ...
+
+
+class sw_version(BaseData, ABC):
+    ...
+
+
+class tag(BaseData, ABC):
+    ...
+
+
+class targets(BaseData, ABC):
+    ...
+
+
+class threshold(BaseData, ABC):
+    ...
+
+
+class timeout(BaseData, ABC):
+    ...
+
+
+class tos(BaseData, ABC):
+    ...
+
+
+class translatedDestination(BaseData, ABC):
+    ...
+
+
+class translatedDestinationPort(BaseData, ABC):
+    ...
+
+
+class translatedNetwork(BaseData, ABC):
+    ...
+
+
+class translatedPort(BaseData, ABC):
+    ...
+
+
+class translatedSource(BaseData, ABC):
+    ...
+
+
+class translatedSourcePort(BaseData, ABC):
+    ...
+
+
+class type(BaseData, ABC):
+    ...
+
+
+class unidirectional(BaseData, ABC):
+    ...
+
+
+class updateFrequency(BaseData, ABC):
+    ...
+
+
+class upgadePackage(BaseData, ABC):
+    ...
+
+
+class url(BaseData, ABC):
+    ...
+
+
+class urls(BaseData, ABC):
+    ...
+
+
+class value(BaseData, ABC):
+    ...
+
+
+class variableSet(BaseData, ABC):
+    ...
+
+
+class vlanId(BaseData, ABC):
+    ...
+
+
+class vlanTags(BaseData, ABC):
     ...
 
 
