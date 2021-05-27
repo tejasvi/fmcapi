@@ -80,3 +80,8 @@ class MonitoredInterfaces(APIClassTemplate):
         """POST method for API for MonitoredInterfaces not supported."""
         logging.info("POST method for API for MonitoredInterfaces not supported.")
         pass
+
+    def delete(self):
+        """DELETE method for API for MonitoredInterfaces not supported."""
+        logging.info("DELETE method for API for MonitoredInterfaces not supported.")
+        pass
