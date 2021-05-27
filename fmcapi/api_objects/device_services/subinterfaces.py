@@ -8,7 +8,7 @@ import logging
 
 
 class SubInterfaces(APIClassTemplate):
-    """The Subinterface Object in the FMC."""
+    """The Subinterfaces Object in the FMC."""
 
     VALID_JSON_DATA = [
         "id",

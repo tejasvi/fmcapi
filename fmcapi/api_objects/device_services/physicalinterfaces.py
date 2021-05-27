@@ -178,3 +178,13 @@ class PhysicalInterfaces(APIClassTemplate):
             self.hardware = {"duplex": duplex, "speed": speed}
         else:
             logging.warning(f"Speed {speed} or Duplex {duplex} is not a valid mode.")
+
+    def post(self):
+        """POST method for API for PhysicalInterfaces not supported."""
+        logging.info("POST method for API for PhysicalInterfaces not supported.")
+        pass
+
+    def delete(self):
+        """DELETE method for API for PhysicalInterfaces not supported."""
+        logging.info("DELETE method for API for PhysicalInterfaces not supported.")
+        pass
