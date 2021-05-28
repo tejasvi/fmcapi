@@ -35,13 +35,3 @@ class ApplicationFilters(APIClassTemplate):
         """POST method for API for ApplicationFilters not supported."""
         logging.info("POST method for API for ApplicationFilters not supported.")
         pass
-
-    def put(self):
-        """PUT method for API for ApplicationFilters not supported."""
-        logging.info("PUT method for API for ApplicationFilters not supported.")
-        pass
-
-    def delete(self):
-        """DELETE method for API for ApplicationFilters not supported."""
-        logging.info("DELETE method for API for ApplicationFilters not supported.")
-        pass

@@ -49,6 +49,41 @@ from .urlgroups import URLGroups
 from .variablesets import VariableSets
 from .vlangrouptags import VlanGroupTags
 from .vlantags import VlanTags
+from .anyconnect_profiles import AnyconnectProfiles
+from .anyconnect_custom_attributes import AnyconnectCustomAttributes
+from .anyconnect_packages import AnyconnectPackages
+from .as_path_lists import ASPathLists
+from .community_lists import CommunityLists
+from .certificate_maps import CertificateMaps
+from .dynamic_object_mappings import DynamicObjectMappings
+from .dynamic_objects import DynamicObjects
+from .mappings import Mappings
+from .expanded_community_lists import ExpandedCommunityLists
+from .global_time_zones import GlobalTimeZones
+from .group_policies import GroupPolicies
+from .host_scan_packages import HostScanPackages
+from .intrusion_rule_groups import IntrusionRuleGroups
+from .intrusion_rules import IntrusionRules
+from .ipv4_address_pools import IPv4AddressPools
+from .ipv6_address_pools import IPv6AddressPools
+from .ipv4_prefix_lists import IPv4PrefixLists
+from .ipv6_prefix_lists import IPv6PrefixLists
+from .keychain import Keychain
+from .local_realm_users import LocalRealmUsers
+from .usage import Usage
+from .policy_lists import PolicyLists
+from .radius_server_groups import RadiusServerGroups
+from .route_maps import RouteMaps
+from .si_dns_feeds import SIDNSFeeds
+from .si_dns_lists import SIDNSLists
+from .si_network_feeds import SINetworkFeeds
+from .si_network_lists import SINetworkLists
+from .sinkholes import Sinkholes
+from .sso_servers import SSOServers
+from .standard_access_lists import StandardAccessLists
+from .standard_community_lists import StandardCommunityLists
+from .time_ranges import TimeRanges
+from .time_zone_objects import TimeZoneObjects
 
 logging.debug("In the object_services __init__.py file.")
 
@@ -101,4 +136,39 @@ __all__ = [
     "VariableSets",
     "VlanGroupTags",
     "VlanTags",
+    "AnyconnectCustomAttributes",
+    "AnyconnectPackages",
+    "AnyconnectProfiles",
+    "ASPathLists",
+    "CommunityLists",
+    "CertificateMaps",
+    "DynamicObjectMappings",
+    "DynamicObjects",
+    "Mappings",
+    "ExpandedCommunityLists",
+    "GlobalTimeZones",
+    "GroupPolicies",
+    "HostScanPackages",
+    "IntrusionRuleGroups",
+    "IntrusionRules",
+    "IPv4AddressPools",
+    "IPv6AddressPools",
+    "IPv4PrefixLists",
+    "IPv6PrefixLists",
+    "Keychain",
+    "LocalRealmUsers",
+    "Usage",
+    "PolicyLists",
+    "RadiusServerGroups",
+    "RouteMaps",
+    "SIDNSFeeds",
+    "SIDNSLists",
+    "SINetworkFeeds",
+    "SINetworkLists",
+    "Sinkholes",
+    "SSOServers",
+    "StandardAccessLists",
+    "StandardCommunityLists",
+    "TimeRanges",
+    "TimeZoneObjects",
 ]
