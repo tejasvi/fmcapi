@@ -123,3 +123,13 @@ class IKESettings(APIClassTemplate):
             logging.warning(
                 f'Certificate "{cert_name}" not found.  Cannot set up IKESettings Policy.'
             )
+
+    def post(self):
+        """POST method for API for IKESettings not supported."""
+        logging.info("POST method for API for IKESettings not supported.")
+        pass
+
+    def delete(self):
+        """DELETE method for API for IKESettings not supported."""
+        logging.info("DELETE method for API for IKESettings not supported.")
+        pass

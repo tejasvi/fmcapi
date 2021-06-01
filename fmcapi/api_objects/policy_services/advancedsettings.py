@@ -53,3 +53,8 @@ class AdvancedSettings(APIClassTemplate):
             logging.warning(
                 f'FTD S2S VPN Policy "{pol_name}" not found.  Cannot set up AdvancedSettings for FTDS2SVPNs Policy.'
             )
+
+    def post(self):
+        """POST method for API for AdvancedSettings not supported."""
+        logging.info("POST method for API for AdvancedSettings not supported.")
+        pass

@@ -62,8 +62,3 @@ class PreFilterPolicies(APIClassTemplate):
         logging.debug("In format_data() for AccessPolicies class.")
         json_data["defaultAction"] = self.defaultAction
         return json_data
-
-    def put(self):
-        """PUT method for API for PreFilterPolicies not supported."""
-        logging.info("PUT method for API for PreFilterPolicies not supported.")
-        pass

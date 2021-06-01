@@ -136,3 +136,13 @@ class IPSecSettings(APIClassTemplate):
             if "version" == 2:
                 if "ikeV2IpsecProposal" in self.__dict__:
                     del self.ikeV2IpsecProposal
+
+    def post(self):
+        """POST method for API for IPSecSettings not supported."""
+        logging.info("POST method for API for IPSecSettings not supported.")
+        pass
+
+    def delete(self):
+        """DELETE method for API for IPSecSettings not supported."""
+        logging.info("DELETE method for API for IPSecSettings not supported.")
+        pass

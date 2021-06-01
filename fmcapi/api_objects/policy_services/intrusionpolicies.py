@@ -23,18 +23,3 @@ class IntrusionPolicies(APIClassTemplate):
         super().__init__(fmc, **kwargs)
         logging.debug("In __init__() for IntrusionPolicies class.")
         self.parse_kwargs(**kwargs)
-
-    def post(self):
-        """POST method for API for IntrusionPolicies not supported."""
-        logging.info("POST method for API for IntrusionPolicies not supported.")
-        pass
-
-    def put(self):
-        """PUT method for API for IntrusionPolicies not supported."""
-        logging.info("PUT method for API for IntrusionPolicies not supported.")
-        pass
-
-    def delete(self):
-        """DELETE method for API for IntrusionPolicies not supported."""
-        logging.info("DELETE method for API for IntrusionPolicies not supported.")
-        pass
