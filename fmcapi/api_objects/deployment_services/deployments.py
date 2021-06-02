@@ -8,6 +8,8 @@ class Deployments(APIClassTemplate):
     """The Deployments Object in the FMC."""
 
     FIRST_SUPPORTED_FMC_VERSION = "7.0"
+    container_uuid = ""  # FIXME
+    URL_SUFFIX = f"/deployment/deployabledevices/{container_uuid}/deployments"
 
     def post(self):
         """POST method for API for Deployments not supported."""
