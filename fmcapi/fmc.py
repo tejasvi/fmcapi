@@ -28,6 +28,10 @@ default logger.  This reduces the size of our log files.
 logging.getLogger("requests").setLevel(logging.WARNING)
 
 
+class AuthenticationError(Exception):
+    pass
+
+
 class FMC(object):
     """Establish and maintain connection to Firepower Management Center."""
 
@@ -144,7 +148,7 @@ class FMC(object):
             return self
         else:
             logging.info("User authentication failed.")
-            exit(1)
+            raise AuthenticationError("Access token not found in the response")
 
     def __exit__(self, *args):
         """
