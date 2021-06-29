@@ -114,7 +114,7 @@ class APIClassTemplate(object):
         objects of this type otherwise return requested name/id values.  Set "expanded=true" results for specific object
         to gather additional detail.
 
-        :return: requests response
+        :return: (dict) requests response
         """
         logging.debug("In get() for APIClassTemplate class.")
         self.parse_kwargs(**kwargs)
@@ -132,7 +132,7 @@ class APIClassTemplate(object):
                     )
                     logging.info("\tMethod = GET")
                     logging.info(f"\tURL = {self.URL}")
-                    return False
+                    return {}
                 response = self.fmc.send_to_api(method="get", url=url)
                 try:
                     self.parse_kwargs(**response)
@@ -192,7 +192,7 @@ class APIClassTemplate(object):
                     )
                     logging.info("\tMethod = GET")
                     logging.info(f"\tURL = {self.URL}")
-                    return False
+                    return {}
                 response = self.fmc.send_to_api(method="get", url=url)
             if "items" not in response:
                 response["items"] = []
@@ -201,7 +201,7 @@ class APIClassTemplate(object):
             logging.warning(
                 "get() method failed due to failure to pass valid_for_get() test."
             )
-            return False
+            return {}
 
     def valid_for_post(self):
         """
