@@ -233,7 +233,7 @@ class APIClassTemplate(object):
             logging.info(
                 "ID value exists for this object.  Redirecting to put() method."
             )
-            self.put()
+            return self.put()
         else:
             if self.valid_for_post():
                 if self.dry_run:

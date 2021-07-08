@@ -13,6 +13,7 @@ import json
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import logging
 from logging.handlers import RotatingFileHandler
+from random import randint
 from .api_objects import ServerVersion
 from .api_objects import DeploymentRequests
 from sys import exit
@@ -56,6 +57,7 @@ class FMC(object):
         debug=False,
         limit=1000,
         timeout=5,
+        check_server_version=True,
     ):
         """
         Instantiate some variables prior to calling the __enter__() method.
@@ -71,6 +73,7 @@ class FMC(object):
         :param debug (bool): True to enable debug logging. (Default is False)
         :param limit (int): Sets up max data to gather per "page". (Default is 1000)
         :param timeout (int):  Maximum seconds to establish connection (Default is 5)
+        :param check_server_version (bool): Check server version compatibility (Default is True)
         :return: None
         """
         self.debug = debug
@@ -111,6 +114,7 @@ class FMC(object):
         self.autodeploy = autodeploy
         self.limit = limit
         self.timeout = timeout
+        self.check_server_version = check_server_version
         self.vdbVersion = None
         self.sruVersion = None
         self.serverVersion = None
@@ -120,6 +124,7 @@ class FMC(object):
         self.page_counter = None
         self.more_items = []
         self.error_response = None
+        self.requests_session = requests.session()
 
     def __enter__(self):
         """
@@ -135,15 +140,19 @@ class FMC(object):
             domain=self.domain,
             verify_cert=self.VERIFY_CERT,
             timeout=self.timeout,
+            requests_session=self.requests_session,
         )
         self.uuid = self.mytoken.uuid
         if self.mytoken.access_token:
             self.build_urls()
 
-            version = ServerVersion(fmc=self)
-            version.get()
-            self.serverVersion = version.serverVersion
-            logging.info(f"This FMC's version is {self.serverVersion}")
+            if self.check_server_version:
+                version = ServerVersion(fmc=self)
+                version.get()
+                self.serverVersion = version.serverVersion
+                logging.info(f"This FMC's version is {self.serverVersion}")
+            else:
+                self.serverVersion = str(9) * 10
 
             return self
         else:
@@ -191,7 +200,7 @@ class FMC(object):
         :param headers (str):  String of header variables.
         :param json_data (str):  JSON formatted string as payload. (Default is None)
         :param more_items (str):  Used for paging in query.
-        :return: JSON response from FMC
+        :return: (dict) JSON response from FMC
         """
         logging.debug("In the FMC send_to_api() class method.")
 
@@ -214,24 +223,24 @@ class FMC(object):
         try:
             while status_code == 429:
                 if method == "get":
-                    response = requests.get(
+                    response = self.requests_session.get(
                         url, headers=headers, verify=self.VERIFY_CERT, timeout=self.timeout
                     )
                 elif method == "post":
-                    response = requests.post(
+                    response = self.requests_session.post(
                         url, json=json_data, headers=headers, verify=self.VERIFY_CERT, timeout=self.timeout
                     )
                 elif method == "put":
-                    response = requests.put(
+                    response = self.requests_session.put(
                         url, json=json_data, headers=headers, verify=self.VERIFY_CERT, timeout=self.timeout
                     )
                 elif method == "delete":
-                    response = requests.delete(
+                    response = self.requests_session.delete(
                         url, headers=headers, verify=self.VERIFY_CERT, timeout=self.timeout
                     )
                 else:
                     logging.error("No request method given.  Returning nothing.")
-                    return
+                    raise Exception("No request method given")
                 if self.debug:
                     debug_msg = ["Response from FMC's API:"]
                     for response_var in dir(response):
@@ -246,7 +255,7 @@ class FMC(object):
                         f"Too many connections to the FMC.  Waiting {self.TOO_MANY_CONNECTIONS_TIMEOUT} "
                         f"seconds and trying again."
                     )
-                    time.sleep(self.TOO_MANY_CONNECTIONS_TIMEOUT)
+                    time.sleep(self.TOO_MANY_CONNECTIONS_TIMEOUT + randint(-2, 2))
                 if status_code == 401:
                     logging.warning("Token has expired. Trying to refresh.")
                     self.mytoken.access_token = None
@@ -271,7 +280,7 @@ class FMC(object):
             self.error_response = json_response
             if response:
                 response.close()
-            return None
+            raise Exception("Error in POST operation")
         if response:
             response.close()
         try:
@@ -321,7 +330,8 @@ class Token(object):
         password="Admin123",
         domain=None,
         verify_cert=False,
-        timeout=5
+        timeout=5,
+        requests_session=None
     ):
         """
         Initialize variables used in the Token class.
@@ -332,6 +342,7 @@ class Token(object):
         :param domain (str):  UUID of domain.  Default is None which implies Global domain.
         :param verify_cert (bool):  Validate cert  (Default is False)
         :param timeout (int):  Maximum seconds to establish connection (Default is 5)
+        :param requests_session: Reuse provided request session
         :return: None
         """
         logging.debug("In the Token __init__() class method.")
@@ -347,6 +358,7 @@ class Token(object):
         self.access_token = None
         self.refresh_token = None
         self.token_creation_time = None
+        self.requests_session = requests_session or requests.session()
         self.generate_tokens()
 
     def generate_tokens(self):
@@ -368,7 +380,7 @@ class Token(object):
                 f"Refreshing tokens, {self.token_refreshes} out of {self.MAX_REFRESHES} refreshes, "
                 f"from {url}."
             )
-            response = requests.post(url, headers=headers, verify=self.verify_cert, timeout=self.timeout)
+            response = self.requests_session.post(url, headers=headers, verify=self.verify_cert, timeout=self.timeout)
             logging.debug(
                 "Response from refreshtoken() post:\n"
                 f"\turl: {url}\n"
@@ -386,7 +398,7 @@ class Token(object):
                 f"https://{self.__host}/{self.API_PLATFORM_VERSION}/auth/generatetoken"
             )
             logging.info(f"Requesting new tokens from {url}.")
-            response = requests.post(
+            response = self.requests_session.post(
                 url,
                 headers=headers,
                 auth=requests.auth.HTTPBasicAuth(self.__username, self.__password),
@@ -403,9 +415,12 @@ class Token(object):
         self.refresh_token = response.headers.get("X-auth-refresh-token")
         self.uuid = response.headers.get("DOMAIN_UUID")
         if self.access_token:
-            all_domain = json.loads(response.headers.get("DOMAINS"))
+            domain_response = response.headers.get("DOMAINS")
+            if domain_response is None:
+                raise Exception
+            self.all_domain = json.loads(domain_response)
             if self.__domain is not None:
-                for domain in all_domain:
+                for domain in self.all_domain:
                     if "global/" + self.__domain.lower() == domain["name"].lower():
                         logging.info(f"Domain set to {domain['name']}")
                         self.uuid = domain["uuid"]

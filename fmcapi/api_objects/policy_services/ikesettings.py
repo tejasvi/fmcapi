@@ -40,18 +40,24 @@ class IKESettings(APIClassTemplate):
         self.parse_kwargs(**kwargs)
         self.type = "IKESetting"
 
-    def vpn_policy(self, pol_name):
+    def vpn_policy(self, pol_name=None, vpn_id=None):
         """
         Associate VPN Policy.
 
         :param pol_name: (str) Name of VPN Policy.
+        :param vpn_id: (str) VPN topology ID. (default is None)
         :return: None
         """
-        logging.debug("In vpn_policy() for IKESettings class.")
-        ftd_s2s = FTDS2SVPNs(fmc=self.fmc)
-        ftd_s2s.get(name=pol_name)
-        if "id" in ftd_s2s.__dict__:
-            self.vpn_id = ftd_s2s.id
+        logging.debug("In vpn_policy() for IKESetting class.")
+        if vpn_id is None:
+            if pol_name is not None:
+                ftd_s2s = FTDS2SVPNs(fmc=self.fmc)
+                ftd_s2s.get(name=pol_name)
+                if "id" in ftd_s2s.__dict__:
+                    vpn_id = ftd_s2s.id
+
+        if vpn_id is not None:
+            self.vpn_id = vpn_id
             self.URL = f"{self.fmc.configuration_url}{self.PREFIX_URL}/{self.vpn_id}/ikesettings"
             self.vpn_added_to_url = True
         else:
@@ -79,17 +85,17 @@ class IKESettings(APIClassTemplate):
         pol1.get(name=pol_name)
 
         if "id" in pol1.__dict__ and version == 1:
-            self.ikeV1Settings["policy"] = {
+            self.ikeV1Settings["policies"] = [{
                 "id": pol1.id,
                 "name": pol1.name,
                 "type": pol1.type,
-            }
+            }]
         elif "id" in pol1.__dict__ and version == 2:
-            self.ikeV2Settings["policy"] = {
+            self.ikeV2Settings["policies"] = [{
                 "id": pol1.id,
                 "name": pol1.name,
                 "type": pol1.type,
-            }
+            }]
         else:
             logging.warning(
                 f'IKEv"{version}"Policy "{pol_name}" not found.  Cannot set up IKESettings Policy.'

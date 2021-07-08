@@ -58,23 +58,28 @@ class Endpoints(APIClassTemplate):
         self.parse_kwargs(**kwargs)
         self.type = "EndPoint"
 
-    def vpn_policy(self, pol_name):
+    def vpn_policy(self, pol_name=None, vpn_id=None):
         """
         Associate a VPN Policy.
 
-        :param pol_name: (str) Name of VPN Policy.
+        :param pol_name: (str) Name of VPN Policy. (default is None)
+        :param vpn_id: (str) VPN topology ID. (default is None)
         :return: None
         """
         logging.debug("In vpn_policy() for Endpoints class.")
-        ftd_s2s = FTDS2SVPNs(fmc=self.fmc)
-        ftd_s2s.get(name=pol_name)
-        if "id" in ftd_s2s.__dict__:
-            self.vpn_id = ftd_s2s.id
+        if vpn_id is None:
+            if pol_name is not None:
+                ftd_s2s = FTDS2SVPNs(fmc=self.fmc)
+                ftd_s2s.get(name=pol_name)
+                if "id" in ftd_s2s.__dict__:
+                    vpn_id = ftd_s2s.id
+
+        if vpn_id is not None:
+            self.vpn_id = vpn_id
             self.URL = (
                 f"{self.fmc.configuration_url}{self.PREFIX_URL}/{self.vpn_id}/endpoints"
             )
             self.vpn_added_to_url = True
-            self.topology_type = ftd_s2s.topologyType
         else:
             logging.warning(
                 f'FTD S2S VPN Policy "{pol_name}" not found.  '
@@ -144,7 +149,7 @@ class Endpoints(APIClassTemplate):
         )
         new_intf = None
         for item in items:
-            if item["ifname"] == ifname:
+            if ("ifname" in item and item["ifname"] == ifname) or ("name" in item and item["name"] == ifname):
                 new_intf = {"id": item["id"], "type": item["type"]}
                 break
         if new_intf is None:
