@@ -347,7 +347,7 @@ class Token(object):
         """
         logging.debug("In the Token __init__() class method.")
 
-        self.__host = host
+        self.__host = host.removeprefix("https://").removeprefix("http://")
         self.__username = username
         self.__password = password
         self.__domain = domain
